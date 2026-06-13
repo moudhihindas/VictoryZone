@@ -1,0 +1,278 @@
+/* --- GLOBAL RESET & BOX MODEL --- */
+/* --- إعادة ضبط عامة ونموذج الصندوق --- */
+* {
+    box-sizing: border-box; /* Ensures padding doesn't affect element width - يضمن أن الحشوة لا تؤثر على عرض العناصر */
+}
+
+/* --- DESIGN SYSTEM (CSS VARIABLES) --- */
+/* --- نظام التصميم (متغيرات CSS) لسهولة التعديل على الألوان في كامل الموقع --- */
+:root {
+    --neon-orange: #ff8c1a; /* Primary Brand Color - لون الهوية الرئيسي */
+    --neon-blue: #00f2ff; /* Accent Color - لون التمييز */
+    --bg-dark: #02060c; /* Main Background - الخلفية الأساسية */
+    --border: rgba(255, 255, 255, 0.15);
+    --text-gray: rgba(255, 255, 255, 0.7);
+    --glass-bg: rgba(2, 6, 12, 0.6); /* Semi-transparent background - خلفية شبه شفافة */
+    --glass-bg-light: rgba(2, 6, 12, 0.4);
+}
+
+body {
+    margin: 0;
+    background-color: var(--bg-dark);
+    color: white;
+    font-family: 'Rajdhani', sans-serif;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* ===== العناوين ===== */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', sans-serif;
+}
+
+h1 {
+    text-align: center;
+    margin: 60px 0 40px;
+    font-size: 45px;
+}
+
+h1 span {
+    color: var(--neon-orange);
+}
+
+.category-section h1 {
+    color: var(--neon-blue);
+    margin-top: 30px;
+    margin-bottom: 40px;
+    font-size: 36px;
+}
+
+/* ===== بطاقات الفرق ===== */
+.category-grid {
+    display: grid;
+    /* Auto-Responsive Grid: Adjusts columns based on screen size - شبكة تلقائية التجاوب: تضبط الأعمدة بناءً على حجم الشاشة */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 50px 0;
+}
+
+.category-grid a {
+    position: relative;
+    height: 350px;
+    border-radius: 15px;
+    overflow: hidden; /* Clips the image inside the border radius - يقص الصورة داخل حدود البطاقة */
+    border: 1px solid var(--border);
+    display: block;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+}
+
+.category-grid a:hover {
+    border-color: var(--neon-orange);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255, 140, 26, 0.3);
+}
+
+
+.category-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.category-grid a:hover img {
+    opacity: 1;
+}
+
+.category-grid div {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(transparent, rgba(2, 6, 12, 0.9));
+    text-align: center;
+}
+
+.category-grid h2 {
+    color: white;
+    font-size: 24px;
+    font-family: 'Orbitron', sans-serif;
+    margin: 0;
+}
+
+/* ===== بطاقات اللاعبين ===== */
+.players-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    padding: 20px 0 60px;
+}
+
+.player-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 30px;
+    border: 1px solid var(--border);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.player-card:hover {
+    border-color: var(--neon-orange);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255, 140, 26, 0.3);
+}
+
+.player-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 15px;
+    border: 2px solid var(--neon-blue);
+    margin-bottom: 20px;
+    object-fit: cover;
+}
+
+.player-card h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-family: 'Orbitron', sans-serif;
+    color: white;
+}
+
+.player-card p {
+    color: var(--text-gray);
+    font-size: 16px;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.label {
+    color: var(--neon-orange);
+    font-weight: bold;
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* ===== أقسام التصنيفات ===== */
+.category-section {
+    display: none;
+    padding: 60px 0;
+}
+
+.category-section:target {
+    display: block;
+}
+
+body:not(:has(:target)) .category-section {
+    display: block;
+}
+
+/* --- [MOBILE RESPONSIVENESS] --- */
+/* --- [التجاوب مع شاشات الجوال] --- */
+@media (max-width: 768px) {
+    .nav-flex {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    
+    .nav-links a {
+        font-size: 13px;
+    }
+    
+    h1 {
+        font-size: 32px;
+    }
+    
+    .category-section h1 {
+        font-size: 28px;
+    }
+    
+    .players-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .profile-container {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}
+
+/* زر الرجوع بنفس تصميم read-more-btn */
+.back-to-teams {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 12px;
+    background: transparent;
+    border: 1px solid var(--neon-orange);
+    color: white;
+    padding: 10px 25px;
+    text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    transition: all 0.3s ease;
+    transform: skew(-20deg);
+    border-radius: 0;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.back-to-teams span {
+    display: inline-block;
+    transform: skew(20deg);
+}
+
+.back-to-teams:hover {
+    background: var(--neon-orange);
+    color: var(--bg-dark);
+    box-shadow: 0 0 20px rgba(255, 140, 26, 0.5);
+}
+
+/* Submit button */
+.submit-btn {
+    padding: 14px 32px !important;
+    background: var(--neon-orange)!important;
+    border: 2px solid var(--neon-orange)!important;
+    color: #000 !important;
+    font-family: 'Orbitron', sans-serif !important;
+    font-size: 0.9rem!important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    text-decoration: none!important;
+    letter-spacing: 1px !important;
+    transition: all 0.3s ease !important;
+    transform: skew(-20deg) !important;
+    border-radius: 0 !important;
+    position: relative !important;
+    overflow: hidden!important;
+    display: inline-flex!important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.submit-btn span {
+    display: inline-block !important;
+    transform: skew(20deg) !important;
+}
+
+.submit-btn svg {
+    transform: skew(20deg)!important;
+    width: 1rem!important;
+    height: 1rem !important;
+}
+
+.submit-btn:hover {
+    background: transparent !important;
+    color: var(--neon-orange)!important;
+    box-shadow: 0 0 20px rgba(255,140,26,0.4)!important;
+}
